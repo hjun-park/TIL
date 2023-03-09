@@ -21,3 +21,5 @@ Github TIL은 [namjunemy](https://github.com/namjunemy/)님, [cheese10yun](https
 ### JAVA
 20230308 : 기록
 
+### Git
+- [Git stash](https://github.com/hjun-park/TIL/blob/main/git/git_stash.md)
