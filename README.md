@@ -19,7 +19,9 @@ Github TIL은 [namjunemy](https://github.com/namjunemy/)님, [cheese10yun](https
 ## 분류
 
 ### JAVA
-20230308 : 기록
+- [230312 / 객체지향 4가지 특성 및 설계 5원칙](https://github.com/hjun-park/TIL/blob/main/java/%EA%B0%9D%EC%B2%B4%EC%A7%80%ED%96%A5(%ED%8A%B9%EC%84%B1%204%EA%B0%9C%EC%99%80%20%EC%9B%90%EC%B9%99%205%EA%B0%80%EC%A7%80).md)
+- [230312 / 추상클래스 vs 인터페이스](https://github.com/hjun-park/TIL/blob/main/java/%EC%B6%94%EC%83%81%ED%81%B4%EB%9E%98%EC%8A%A4%20vs%20%EC%9D%B8%ED%84%B0%ED%8E%98%EC%9D%B4%EC%8A%A4.md)
 
 ### Git
-- [Git stash](https://github.com/hjun-park/TIL/blob/main/git/git_stash.md)
+- [230310 / Git Stash](https://github.com/hjun-park/TIL/blob/main/git/git_stash.md)
+
