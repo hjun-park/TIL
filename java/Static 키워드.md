@@ -1,0 +1,104 @@
+- [Static 키워드](#static----)
+   * [1. Static 변수, Static 클래스](#1-static-----static----)
+      + [1-1. Static 변수](#1-1-static---)
+         - [Static 변수가 없다면](#static--------)
+         - [Static 변수 사용](#static------)
+      + [1-2. Static 메서드](#1-2-static----)
+   * [2. static 장단점](#2-static----)
+      + [2-1. static 장점](#2-1-static---)
+      + [2-2. static 단점](#2-2-static---)
+   * [3. 어디에 쓰면 좋을까 ?](#3-------------)
+
+
+# Static 키워드
+- 클래스 메서드, 클래스 필드 지정 시에 사용
+- 인스턴스 생성하지 않아도 메서드와 필드에 바로 접근이 가능하다.
+- 
+![image](https://user-images.githubusercontent.com/70880695/224642672-6d921742-b41b-401d-8717-a7c6beffbb0d.png)
+> 출처 :  https://mangkyu.tistory.com/47
+> > Static(=method) data area는 GC의 영향을 받지 않는다.
+
+
+## 1. Static 변수, Static 클래스
+### 1-1. Static 변수
+
+#### Static 변수가 없다면
+```java
+public class Pet {
+    private String name = "Natto";
+	    
+	public void printName() {
+	    System.out.println(this.name);
+	}
+}
+```
+1. 10000개의 Pet 객체를 생성하면 `Natto` 라는 String 값이 10000개나 생성된다.
+2. 중복된 값을 계속해서 메모리 생성하는 것은 메모리 효율이 매우 좋지 않다.
+
+<br />
+
+#### Static 변수 사용
+
+```java
+public class Pet {
+    public static final String name = "Natto";
+
+    public void printName() {
+        System.out.println(name);
+    }
+}
+```
+1. static 변수를 사용하면 클래스 로딩 시 Natto 라는 값이 static area(=method area)에 고정되어 할당된다.
+2. 따라서 고정된 메모리 주소에 있는 "Natto"를 가져오므로 10000번 생성해도 같은 주소에 있는 "Natto" 값을 갖고올 것이다.
+
+<br />
+
+### 1-2. Static 메서드
+- static method는 객체 생성 없이 호출 가능
+```java
+public class PetTest {
+    private String name1 = "Natto";
+    private static String name2 = "Natto";
+ 
+    public static void printMax(int x, int y) {
+        System.out.println(Math.max(x, y));
+    }
+         
+    public static void printName(){
+       // System.out.println(name1); 불가능한 호출
+       System.out.println(name2);
+    }
+}
+```
+> 예제참고 : https://mangkyu.tistory.com/47
+1. `printMax` 함수
+    - Math.max는 static method라서 바로 호출이 가능하다.
+2. `printName` 함수
+    - static 메서드인 `printName`은 static 필드만 호출할 수 있다.
+
+
+## 2. static 장단점
+
+### 2-1. static 장점
+1. 속도가 빠르다. 
+   - 인스턴스를 생성하지 않고 바로 사용하기 때문에 빠르다.
+2. 메모리 효율성 
+   - Static 메모리 영역(=method area)에 저장되어 고정된 메모리 공간을 차지함
+   - new로 매번 인스턴스를 생성할 필요가 없기 때문에 메모리 줄일 수 있다.
+
+
+<br />
+
+### 2-2. static 단점
+1. 프로그램 종료 시까지 메모리에 상주함
+   - Static 영역(=method area)에 상주하기 때문에 GC의 관리를 받지 않는다.
+   - 많은 Static 사용은 성능에 영향을 끼친다. (memory leak)
+2. 캡슐화 원칙을 위반한다.
+   - static 클래스는 여러 클래스에서 데이터를 불러올 수 있으므로 캡슐화를 위반한다.
+
+
+<br />
+
+## 3. 어디에 쓰면 좋을까 ?
+1. 스프링에서 Util 클래스를 final로 생성 후에 유틸 관련 함수들을 static으로 선언한다. 이후 `@Component` 등록
+2. Singleton 패턴을 이용하여 객체가 딱 한 번만 만들어지도록 할 수 있다. (Thread Safe하지 않음)
