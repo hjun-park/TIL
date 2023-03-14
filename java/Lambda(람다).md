@@ -28,13 +28,19 @@
 1. `함수형 인터페이스` : 정확히 하나의 추상 메서드를 지정하는 인터페이스
    - `Comparator<T>`, `Runnable` 이 2개가 함수형 인터페이스의 예
 
+<br />
+
+1. @FunctionalInterface 어노테이션
+   - 함수형 인터페이스를 가리키는 어노테이션
+   - 정확히 하나의 추상 메서가 있어야 하며 그 이상일 경우 에러 발생 가능
+
 ### 2-2. 함수형 인터페이스로 무엇을 하는지 ?
 1. 람다 표현식으로 함수형 인터페이스의 추상 메서드 구현을 직접 전달할 수 있다.
 2. 즉, 전체 표현식을 함수형 인터페이스의 인스턴스로 취급할 수 있다.
 
 <br />
 
-#### Runnable을 이용한 예제
+#### Runnable을 이용한 람다식 예제
 - 다음과 같은 함수형 인터페이스가 있다.
 ```java
 @FunctionalInterface
@@ -47,7 +53,6 @@ public interface Runnable {
 ```java
 Runnable r1 = () -> System.out.println("Hello");
 ```
-
 <br />
 
 
