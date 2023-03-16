@@ -34,6 +34,8 @@
 ## 1. JVM 동작방식
 ![image](https://user-images.githubusercontent.com/70880695/224580455-989661d8-0cdd-40ea-86ca-1eecda68731a.png)
 > 출처 : https://steady-snail.tistory.com/67
+- JVM은 `클래스 로더`,  `런타임 데이터 영역`, `실행엔진`으로 구성되어 있다.
+- 컴파일된 바이트코드를 JVM의 클래스 로더가 전달  받는다.
 
 1. JAVA 실행 시 JVM은 OS로부터 메모리 할당 받는다.
 2. 자바 컴파일러(`javac`)가 소스코드(`.java`) ->  바이트코드(`.class`)로 컴파일 한다.
