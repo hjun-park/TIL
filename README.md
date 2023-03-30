@@ -19,9 +19,24 @@ Github TIL은 [namjunemy](https://github.com/namjunemy/)님, [cheese10yun](https
 ## 분류
 
 ### JAVA
-- [230312 / 객체지향 4가지 특성 및 설계 5원칙](https://github.com/hjun-park/TIL/blob/main/java/%EA%B0%9D%EC%B2%B4%EC%A7%80%ED%96%A5(%ED%8A%B9%EC%84%B1%204%EA%B0%9C%EC%99%80%20%EC%9B%90%EC%B9%99%205%EA%B0%80%EC%A7%80).md)
-- [230312 / 추상클래스 vs 인터페이스](https://github.com/hjun-park/TIL/blob/main/java/%EC%B6%94%EC%83%81%ED%81%B4%EB%9E%98%EC%8A%A4%20vs%20%EC%9D%B8%ED%84%B0%ED%8E%98%EC%9D%B4%EC%8A%A4.md)
+- [[2023 3월 1주차] / 객체지향(특성 4개와 원칙 5가지)](https://github.com/hjun-park/TIL/blob/main/java/%EA%B0%9D%EC%B2%B4%EC%A7%80%ED%96%A5(%ED%8A%B9%EC%84%B1%204%EA%B0%9C%EC%99%80%20%EC%9B%90%EC%B9%99%205%EA%B0%80%EC%A7%80).md)
+- [[2023 3월 1주차] / 추상클래스 vs 인터페이스](https://github.com/hjun-park/TIL/blob/main/java/%EC%B6%94%EC%83%81%ED%81%B4%EB%9E%98%EC%8A%A4%20vs%20%EC%9D%B8%ED%84%B0%ED%8E%98%EC%9D%B4%EC%8A%A4.md)
+- [[2023 3월 2주차] / static 키워드](https://github.com/hjun-park/TIL/blob/main/java/Static%20%ED%82%A4%EC%9B%8C%EB%93%9C.md)
+- [[2023 3월 2주차] / JVM(자바가상머신)](https://github.com/hjun-park/TIL/blob/main/java/JVM(%EC%9E%90%EB%B0%94%EA%B0%80%EC%83%81%EB%A8%B8%EC%8B%A0).md)
+- [[2023 3월 2주차] / JVM Heap](https://github.com/hjun-park/TIL/blob/main/java/JVM%20Heap.md)
+- [[2023 3월 2주차] / GC(Garbage Collection)](https://github.com/hjun-park/TIL/blob/main/java/GC(Garbage%20Collection).md)
+- [[2023 3월 2주차] / Final 키워드](https://github.com/hjun-park/TIL/blob/main/java/Final%20%ED%82%A4%EC%9B%8C%EB%93%9C.md)
+
+### 모던자바인액션
+- [[2023 3월 4주차] / Lambda(람다)](https://github.com/hjun-park/TIL/blob/main/java/%EB%AA%A8%EB%8D%98%EC%9E%90%EB%B0%94%EC%9D%B8%EC%95%A1%EC%85%98/Lambda(%EB%9E%8C%EB%8B%A4).md)
+- [[2023 3월 4주차] / Stream(스트림)](https://github.com/hjun-park/TIL/blob/main/java/%EB%AA%A8%EB%8D%98%EC%9E%90%EB%B0%94%EC%9D%B8%EC%95%A1%EC%85%98/Stream.md)
+
 
 ### Git
-- [230310 / Git Stash](https://github.com/hjun-park/TIL/blob/main/git/git_stash.md)
+- [[2023 3월 1주차] / Git Stash](https://github.com/hjun-park/TIL/blob/main/git/git_stash.md)
 
+### DB
+- [[2023 3월 3주차] / MariaDB 재귀쿼리](https://github.com/hjun-park/TIL/blob/main/database/%5BMariadb%5D%20With%20clause%20(%EC%9E%AC%EA%B7%80%20%EC%BF%BC%EB%A6%AC).md)
+
+### Blog
+- [[2023 3월 2주차] / Mybatis에서 DTO로 분리하기](https://blossom6729.tistory.com/32)
