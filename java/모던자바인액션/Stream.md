@@ -64,3 +64,48 @@ public class Main {
 ```
 
 # 155 page
+## 3. Stream 활용
+### 3-1. 스트림 필터링 
+1. `filter` : 조건에 맞는 요소만 선택
+2. `distinct` : 중복 제거
+
+```java
+class Filtering {
+public static void main(String[] args) {
+    List<Integer> numbers = Arrays.asList(1, 2, 1, 3, 3, 2, 4);
+    numbers.stream()
+        .filter(i -> i % 3 == 0)    // 3으로 나누어 떨어지는 요소만 선택
+        .distinct()                // 중복 제거
+        .forEach(System.out::println);
+    }
+}
+```
+
+### 3-2. 스트림 슬라이싱
+1. `limit` : 처음 n개 요소 선택
+2. `skip` : 처음 n개 요소 제외
+3. `takeWhile` : 조건에 맞는 요소 선택
+4. `dropWhile` : 조건에 맞는 요소 제외
+ 
+```java
+class Slicing {
+    public static void main(String[] args) {
+        List<Dish> menu = Arrays.asList(
+            new Dish("pork", false, 800, Dish.Type.MEAT),
+            new Dish("beef", false, 700, Dish.Type.MEAT),
+            new Dish("chicken", false, 400, Dish.Type.MEAT),
+            new Dish("french fries", true, 530, Dish.Type.OTHER),
+            new Dish("salmon", false, 450, Dish.Type.FISH));
+
+        // 칼로리 320 미만인 요소만 takeWhile
+        List<Dish> dishes = menu.stream()
+            .takeWhile(dish -> dish.getCalories() < 320)
+            .collect(toList());
+        
+        // 칼로리 320 초과인 요소만 dropWhile
+        List<Dish> dishes2 = menu.stream()
+            .dropWhile(dish -> dish.getCalories() < 320)
+            .collect(toList());
+    }
+}
+```
