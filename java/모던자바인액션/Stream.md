@@ -109,3 +109,141 @@ class Slicing {
     }
 }
 ```
+
+### 3-3. 매핑
+
+#### 🔵 map (매핑)
+```java
+// stream Map 예제
+public class Mapping {
+	public static void main(String[] args) {
+		List<Integer> nameLengths = menu.stream()
+			.map(Dish::getName)         // 이름만 가져와서
+			.map(String::length)        // 길이를 구한다.
+			.collect(toList());       
+	}
+}
+```
+
+<br />
+
+#### 🔵 Stream FlatMap (스트림 평면화)
+- flatMap은 각 배열을 스트림으로 변환한 다음에 모든 스트림을 하나의 스트림으로 연결하는 기능을 한다.
+- 모던자바인 액션 `퀴즈 5-2` (165page)
+
+```java
+// 2개의 숫자 리스트가 있을 때 모든 숫자 쌍의 리스트 반환
+// [1, 2, 3] [3, 4] -> [(1, 3), (1, 4), (2, 3), (2, 4), (3, 3), (3, 4)]
+public class FlatMap {
+	public static void main(String[] args) {
+		List<Integer> numbers1 = Arrays.asList(1, 2, 3);
+		List<Integer> numbers2 = Arrays.asList(3, 4);
+		List<int[]> pairs = numbers.stream()
+            .flatMap(num1 -> numbers2.stream()
+                .map(num2 -> new int[]{num1, num2})
+			)
+            .collect(toList());
+	}
+} 
+```
+
+<br />
+
+### 3-4. 검색과 매칭
+1. `anyMatch` : 적어도 조건에 하나라도 일치하는지 확인
+2. `allMatch` : 모든 요소가 조건에 일치하는지 확인
+3. `noneMatch` : 모든 요소가 조건에 일치하지 않는지 확인
+4. `findFirst` : 첫 번째 요소 반환
+5. `findAny` : 현재 스트림에서 임의의 요소 반환
+
+<br />
+
+#### 🔵 특징
+1. `anyMatch` `allMatch` `noneMatch`는 `쇼트서킷`을 지원한다.
+   - 따라서 `findFirst` `findAny`보다 더 효율적이다.
+2. `findFirst` `findAny`는 `쇼트서킷`을 지원하지 않는다.
+
+<br />
+
+#### 🔵 그럼에도 불구하고 `findFirst` `findAny` 사용하는 이유
+1. `병렬 스트림`에서는 `findFirst` `findAny`가 더 빠르다.
+2. `병렬 스트림`에서는 `쇼트서킷`을 지원하지 않는다.
+    - 병렬 실행에서는 첫 번째 요소를 찾기 어렵기 때문이다.
+    - `쇼트서킷`을 지원하지 않는다는 것은 `모든 요소를 검사`한다는 것이다.
+    - `병렬 스트림`에서는 `모든 요소를 검사`하는 것이 더 빠르다.
+
+<br />
+
+### 3-5. 리듀싱
+- `reduce` : 스트림의 요소를 하나로 줄인다. 즉, 모든 스트림 요소를 처리해서 값으로 도출한다.
+- `reduce`는 `쇼트서킷`을 지원한다.
+
+```java
+// reduce 예제
+// reduce(초기값, BinaryOperator<T> 람다 표현식)
+public class Reduce {
+    public static void main(String[] args) {
+        int sum = numbers.stream().reduce(0, (a, b) -> a + b);
+    }
+}
+```
+
+<br />
+
+### 3-6. 숫자형 스트림
+- `IntStream` `LongStream` `DoubleStream` : 기본형 특화 스트림
+- `mapToInt` `mapToLong` `mapToDouble` : 스트림의 요소를 특화 스트림으로 매핑
+
+```java
+// 숫자형 스트림 예제
+public class NumericStream {
+    public static void main(String[] args) {
+        int sumProtein = menu.stream()
+            .mapToInt(Food::getProtien)
+            .sum();
+    }
+}
+```
+
+<br />
+
+### 3-7. 스트림 만들기
+
+#### 1) 값, 배열을 스트림으로 변환
+1. `Stream.of` : 여러 값들을 스트림으로 변환
+2. `Arrays.stream` : 배열을 스트림으로 변환
+3. `Stream.empty` : 빈 스트림 생성
+4. `Stream.builder` : 빈 스트림 생성
+5. `Stream.concat` : 두 개의 스트림을 하나로 합침
+
+<br />
+
+#### 2) 함수로 무한 스트림 만들기
+1. `Stream.iterate` : 무한 스트림 생성
+2. `Stream.generate` : 무한 스트림 생성
+
+- `iterate`, `generate` 메서드는 무한 스트림을 만들기 때문에 limit 메서드로 스트림의 크기를 제한해야 한다.
+
+<br /> 
+
+#### 🔵 `iterate` `generate` 차이점
+- `iterate` : 이전 값을 기반으로 다음 값을 계산
+- `generate` : 이전 값을 기반으로 다음 값을 계산하지 않음
+
+<br />
+
+#### 🔵 언제 `iterate`를 사용할까 ? 
+- `iterate`는 이전 값을 기반으로 다음 값을 계산하기 때문에 `상태를 유지`해야 한다.
+- `iterate`는 `상태를 유지`하기 때문에 `병렬 스트림`에서는 `순차적으로 처리`된다.
+- 즉, 순서가 보장되어야할 때 사용
+
+<br />
+
+#### 🔵 언제 `generate`를 사용할까 ?
+- `generate`는 이전 값을 기반으로 다음 값을 계산하지 않기 때문에 `상태를 유지`할 필요가 없다.
+- `generate`는 `상태를 유지`할 필요가 없기 때문에 `병렬 스트림`에서 `병렬로 처리`된다.
+- 순서 보장보다는 `성능`이 중요할 때 사용
+
+### 197 페이지부터
+
+
