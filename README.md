@@ -26,6 +26,10 @@ Github TIL은 [namjunemy](https://github.com/namjunemy/)님, [cheese10yun](https
 - [[2023 3월 2주차] / JVM Heap](https://github.com/hjun-park/TIL/blob/main/java/JVM%20Heap.md)
 - [[2023 3월 2주차] / GC(Garbage Collection)](https://github.com/hjun-park/TIL/blob/main/java/GC(Garbage%20Collection).md)
 - [[2023 3월 2주차] / Final 키워드](https://github.com/hjun-park/TIL/blob/main/java/Final%20%ED%82%A4%EC%9B%8C%EB%93%9C.md)
+- [[2023 4월 1주차] / Call by Value in JAVA](https://github.com/hjun-park/TIL/blob/main/java/Call%20by%20Value%20in%20Java.md)
+- [[2023 4월 1주차] / Object 클래스](https://github.com/hjun-park/TIL/blob/main/java/Object.md)
+- [[2023 4월 1주차] / 동기vs비동기vs블로킹vs논블로킹](https://github.com/hjun-park/TIL/blob/main/java/Blocking_NonBlocking_Sync_Async.md)
+
 
 ### 모던자바인액션
 - [[2023 3월 4주차] / Lambda(람다)](https://github.com/hjun-park/TIL/blob/main/java/%EB%AA%A8%EB%8D%98%EC%9E%90%EB%B0%94%EC%9D%B8%EC%95%A1%EC%85%98/Lambda(%EB%9E%8C%EB%8B%A4).md)
@@ -37,6 +41,7 @@ Github TIL은 [namjunemy](https://github.com/namjunemy/)님, [cheese10yun](https
 
 ### DB
 - [[2023 3월 3주차] / MariaDB 재귀쿼리](https://github.com/hjun-park/TIL/blob/main/database/%5BMariadb%5D%20With%20clause%20(%EC%9E%AC%EA%B7%80%20%EC%BF%BC%EB%A6%AC).md)
+- [[2023 4월 1주차] / MariaDB 검색어 자동완성](https://github.com/hjun-park/TIL/blob/main/database/%5BMariaDB%5D%20%EA%B2%80%EC%83%89%EC%96%B4%20%EC%9E%90%EB%8F%99%EC%99%84%EC%84%B1.md)
 
 ### Blog
 - [[2023 3월 2주차] / Mybatis에서 DTO로 분리하기](https://blossom6729.tistory.com/32)
