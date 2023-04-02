@@ -1,3 +1,5 @@
+https://inpa.tistory.com/entry/MYSQL-%F0%9F%93%9A-%ED%92%80%ED%85%8D%EC%8A%A4%ED%8A%B8-%EC%9D%B8%EB%8D%B1%EC%8A%A4Full-Text-Index-%EC%82%AC%EC%9A%A9%EB%B2%95#%ED%92%80%ED%85%8D%EC%8A%A4%ED%8A%B8_%EC%9D%B8%EB%8D%B1%EC%8A%A4_%EC%A0%84%EC%B2%B4%ED%85%8D%EC%8A%A4%ED%8A%B8_%EC%9D%B8%EB%8D%B1%EC%8A%A4
+
 
 # 검색어 자동완성
 - 검색어 자동완성에는 특정 컬럼에 대해 `Full Text Search`와 `n-gram`을 이용한다.

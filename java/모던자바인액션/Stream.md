@@ -244,6 +244,262 @@ public class NumericStream {
 - `generate`는 `상태를 유지`할 필요가 없기 때문에 `병렬 스트림`에서 `병렬로 처리`된다.
 - 순서 보장보다는 `성능`이 중요할 때 사용
 
-### 197 페이지부터
+## 4. 컬렉터
+- `컬렉터`는 스트림의 요소를 모아서 결과로 누적하는 다양한 방법을 갖는 최종 연산이다.
+- 하나의 값으로 요약하는 `reduce` 뿐만 아니라 `maxBy` `minBy` `summingInt` `averagingInt` `joining` 등 다양한 방법으로 요약할 수 있다.
+- 그룹화도 가능하다. `groupingBy` `partitioningBy` `mapping` 등 다양한 방법으로 그룹화할 수 있다.
+- `Collector` 인터페이스에 정의된 메서드를 구현해서 커스텀 컬렉터를 만들 수 있다.
 
+<br />
+
+### 4-1. 요약
+1. 최소 최대 구하기 : `maxBy` `minBy`
+2. 합계 구하기 : `summingInt` `summingLong` `summingDouble`
+3. 평균 구하기 : `averagingInt` `averagingLong` `averagingDouble`
+4. 최소, 최대, 합계, 평균 모두 구하기  : `summarizingInt` `summarizingLong` `summarizingDouble`
+5. 문자열 연결 : `joining`
+
+### 4-2. 리듀싱 
+- `reducing`으로도 위 연산들이 가능하다. 하지만 가독성을 위해 구현돼 있는 것들을 사용하자
+- `reducing`은 `BinaryOperator`를 인수로 받는다.
+- `reducing(초기값, T -> R, BinaryOperator<R>)` : 초기값, 변환 함수, 두 값을 합치는 함수
+
+```java 
+// reducing 예제
+public class Reducing {
+    public static void main(String[] args) {
+        int sum = menu.stream()
+            .collect(reducing(0, Food::getProtein, (i, j) -> i + j));
+    }
+}
+```
+
+### 4-3. 그룹화
+- `그룹화` : 스트림의 요소를 그룹으로 묶는다.
+- `그룹화`는 `컬렉터`를 사용한다.
+
+```java
+// 그룹화 예제
+public class Grouping {
+    public static void main(String[] args) {
+        Map<Food.Type, List<Food>> foodsByType = menu.stream()
+            .collect(groupingBy(Food::getType));
+    }
+}
+```
+
+#### 🔵 mapping을 이용한 그룹화
+- `mapping` : 스트림의 요소를 다른 값으로 변환한 다음에 그룹화할 수 있다.
+- `mapping(T -> R, Collector<R, A, D>)` : 변환 함수, 컬렉터
+
+```java
+// mapping을 이용한 그룹화 예제
+public class Grouping {
+    public static void main(String[] args) {
+        Map<Food.Type, List<String>> foodNamesByType = menu.stream()
+            .collect(groupingBy(Food::getType, mapping(Food::getName, toList())));
+    }
+}
+```
+
+<br />
+
+#### 🔵 다수준 그룹화
+- `다수준 그룹화` : 두 개 이상의 기준으로 그룹화할 수 있다.
+- `groupingBy`를 두 번 호출하면 된다.
+
+```java
+// 다수준 그룹화 예제
+public class Grouping {
+    public static void main(String[] args) {
+        Map<Food.Type, Map<Food.CaloricLevel, List<Food>>> foodsByTypeCaloricLevel = menu.stream()
+            .collect(groupingBy(Food::getType, groupingBy(food -> {
+                if (food.getCalories() <= 400) return Food.CaloricLevel.DIET;
+                else if (food.getCalories() <= 700) return Food.CaloricLevel.NORMAL;
+                else return Food.CaloricLevel.FAT;
+            })));
+    }
+}
+```
+- 그룹 안에 그룹이 만들어진다.
+- 결과는 아래와 같다.
+    ```markdown
+    {
+        FISH={DIET=[salmon], NORMAL=[prawns], FAT=[shark]},
+        OTHER={DIET=[rice], NORMAL=[season fruit], FAT=[pizza]},
+        MEAT={DIET=[pork], NORMAL=[beef], FAT=[pork, beef]}
+    }
+    ```
+  
+<br />
+
+#### 🔵 서브그룹에서 데이터 수집
+- `서브그룹에서 데이터 수집` : 그룹화된 스트림에 `컬렉터`를 적용할 수 있다.
+- `groupingBy`의 두 번째 인수로 `컬렉터`를 전달하면 된다.
+
+```java
+// 서브그룹에서 데이터 수집 예제
+public class Grouping {
+    public static void main(String[] args) {
+        Map<Food.Type, Long> typesCount = menu.stream()
+            .collect(groupingBy(Food::getType, counting()));
+    }
+}
+```
+- 결과는 아래와 같다.
+    ```markdown
+    {FISH=3, OTHER=3, MEAT=4}
+    ```
+  
+<br />
+
+#### 🔵 `collectingAndThen` 사용
+- `collectingAndThen` : `컬렉터`의 결과를 `다른 값`으로 변환한다.
+- `collectingAndThen(Collector<T, A, R>, Function<R, RR>)` : 컬렉터, 변환 함수
+
+
+```java
+// collectingAndThen 예제
+// 각 서브그룹에서 가장 높은 칼로리를 가진 요리를 찾기
+public class Grouping {
+    public static void main(String[] args) {
+        Map<Food.Type, Food> mostCaloricByType = menu.stream()
+            .collect(groupingBy(Food::getType, collectingAndThen(
+                maxBy(comparingInt(Food::getCalories)), Optional::get)));
+    }
+}
+```
+- 결과는 아래와 같다.
+    ```markdown
+    {FISH=shark, OTHER=pizza, MEAT=pork}
+    ```
+
+<br />
+
+#### 🔵 `partitioningBy` 분할 함수
+1. `partitioningBy` : `boolean`을 반환하는 `분할 함수`를 인수로 받는다.
+2. **기존 `filter` 방식과의 차이점**
+   - 기존 `filter`는 `True`인 것만 남겼다.
+   - 하지만 `partitioningBy`는 `True`와 `False` 모두 남긴다. 
+
+```java
+// partitioningBy 예제
+public class Partitioning {
+    public static void main(String[] args) {
+        Map<Boolean, List<Food>> partitionedMenu = menu.stream()
+            .collect(partitioningBy(Food::isVegetarian));
+    }
+}
+```
+
+<br />
+
+## 4-4. Collector 인터페이스
+- `Collector` 인터페이스는 `컬렉터`를 만들 때 사용한다.
+- `Collector` 인터페이스는 `Supplier`, `Accumulator`, `Combiner`, `Finisher`, `Characteristics`를 인수로 받는다.
+- `Supplier` : 컬렉터가 새로운 결과 컨테이너를 만들 때 사용한다.
+- `Accumulator` : 컬렉터가 스트림의 다음 요소를 처리할 때 사용한다.
+- `Combiner` : 컬렉터가 서로 다른 스레드에서 수집된 부분 결과를 하나로 합칠 때 사용한다.
+- `Finisher` : 컬렉터가 최종 결과를 변환할 때 사용한다.
+- `Characteristics` : 컬렉터의 동작 방식을 설명한다.
+- `Characteristics`는 `IDENTITY_FINISH`, `CONCURRENT`, `UNORDERED`가 있다.
+
+```java
+// Collector 인터페이스 예제
+public interface Collector<T, A, R> {
+    Supplier<A> supplier();
+    BiConsumer<A, T> accumulator();
+    BinaryOperator<A> combiner();
+    Function<A, R> finisher();
+    Set<Characteristics> characteristics();
+}
+```
+
+#### 1. `supplier`
+- 새로운 결과를 갖는 컨테이너를 만든다.
+- `Supplier`는 빈 결과로 이루어진 `Supplier`를 반환
+
+```java
+// supplier 예제
+public class Supplier {
+   public Supplier<List<T>> supplier() {
+	   return () -> new ArrayList<T> ();
+        // return ArrayList::new; // functional interface
+   }
+}
+```
+
+<br />
+
+#### 2. `accumulator`
+- 결과 컨테이너에 요소를 추가한다.
+- `accumulator`는 `reducing` 연산 수행하는 함수 반환 
+
+```java
+// accumulator 예제
+public class Accumulator {
+   public BiConsumer<List<T>, T> accumulator() {
+       return (list, item) -> list.add(item);
+        // return List::add; // functional interface
+   }
+}
+```
+
+<br />
+
+#### 3. `combiner`
+- 두 결과 컨테이너 병합
+- `combiner`는 두 결과를 하나로 합치는 함수 반환
+
+```java
+// combiner 예제
+public class Combiner {
+   public BinaryOperator<List<T>> combiner() {
+       return (list1, list2) -> {
+           list1.addAll(list2);
+           return list1;
+       };
+   }
+}
+```
+
+<br />
+
+#### 4. `finisher`
+- 최종 변환값을 결과 컨테이너로 적용
+- `finisher`는 결과를 최종 형태로 변환하는 함수 반환
+
+```java
+// finisher 예제
+public class Finisher {
+   public Function<List<T>, List<T>> finisher() {
+       return Function.identity();
+   }
+}
+```
+
+<br />
+
+#### 5. `characteristics`
+- 컬렉터의 연산을 정의하는 Characteristics 형식 불변 집합 반환
+- `characteristics`는 `IDENTITY_FINISH`, `CONCURRENT`, `UNORDERED`가 있다.
+
+```java
+// characteristics 예제
+public class Characteristics {
+   public Set<Characteristics> characteristics() {
+       return Collections.unmodifiableSet(EnumSet.of(IDENTITY_FINISH, CONCURRENT));
+   }
+}
+```
+
+<br />
+
+#### 🔵 커스텀 Collector 사용하는 경우
+1. 스트림의 요소를 수집하여 새로운 데이터 구조를 생성해야 하는 경우
+2. 병렬 스트림에서 수집한 요소를 동기화해야 하는 경우
+3. 스트림의 요소를 그룹화하거나 분할해야 하는 경우
+4. 기본 제공 Collector로는 수행할 수 없는 특정한 작업을 수행해야 하는 경우
+
+<br />
 
