@@ -167,7 +167,7 @@ public class Application {
     - 그렇기 때문에 Application과 Kernel 작업은 각자 동시에 일어나게 될 것이다.
 2. Async는 결과에 관심 없기 때문에 다른 작업에서 끝난 결과를 바로 처리하지 않고 자신의 일이 끝나야 처리한다.
 
-#### 🔵 Blocking + Async 실생활 예
+#### 🔵 Non-Blocking + Async 실생활 예
 
 1. A 직원이 마지막 서류를 상사에게 전달
 2. Non-Blocking이기 때문에 상사는 사원에게 돌아가서 자신의 일을 하라고 한다.
