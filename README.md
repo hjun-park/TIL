@@ -18,6 +18,11 @@ Github TIL은 [namjunemy](https://github.com/namjunemy/)님, [cheese10yun](https
 
 ## 분류
 
+
+
+### Algorithm
+- [[2023 3월 2주차] / prefix sum(누적합, 구간합)](https://github.com/hjun-park/TIL/blob/main/algorithm/prefix_sum(%EB%88%84%EC%A0%81%ED%95%A9).md)
+
 ### JAVA
 - [[2023 3월 1주차] / 객체지향(특성 4개와 원칙 5가지)](https://github.com/hjun-park/TIL/blob/main/java/%EA%B0%9D%EC%B2%B4%EC%A7%80%ED%96%A5(%ED%8A%B9%EC%84%B1%204%EA%B0%9C%EC%99%80%20%EC%9B%90%EC%B9%99%205%EA%B0%80%EC%A7%80).md)
 - [[2023 3월 1주차] / 추상클래스 vs 인터페이스](https://github.com/hjun-park/TIL/blob/main/java/%EC%B6%94%EC%83%81%ED%81%B4%EB%9E%98%EC%8A%A4%20vs%20%EC%9D%B8%ED%84%B0%ED%8E%98%EC%9D%B4%EC%8A%A4.md)
@@ -29,11 +34,20 @@ Github TIL은 [namjunemy](https://github.com/namjunemy/)님, [cheese10yun](https
 - [[2023 4월 1주차] / Call by Value in JAVA](https://github.com/hjun-park/TIL/blob/main/java/Call%20by%20Value%20in%20Java.md)
 - [[2023 4월 1주차] / Object 클래스](https://github.com/hjun-park/TIL/blob/main/java/Object.md)
 - [[2023 4월 1주차] / 동기vs비동기vs블로킹vs논블로킹](https://github.com/hjun-park/TIL/blob/main/java/Blocking_NonBlocking_Sync_Async.md)
+- [[2023 4월 1주차] / Generics(제네릭)](https://github.com/hjun-park/TIL/blob/main/java/Generics(%EC%A0%9C%EB%84%A4%EB%A6%AD).md)
 
 
 ### 모던자바인액션
 - [[2023 3월 4주차] / Lambda(람다)](https://github.com/hjun-park/TIL/blob/main/java/%EB%AA%A8%EB%8D%98%EC%9E%90%EB%B0%94%EC%9D%B8%EC%95%A1%EC%85%98/Lambda(%EB%9E%8C%EB%8B%A4).md)
 - [[2023 3월 4주차] / Stream(스트림)](https://github.com/hjun-park/TIL/blob/main/java/%EB%AA%A8%EB%8D%98%EC%9E%90%EB%B0%94%EC%9D%B8%EC%95%A1%EC%85%98/Stream.md)
+- [[2023 4월 1주차] / Parallel Stream(병렬 스트림)](https://github.com/hjun-park/TIL/blob/main/java/%EB%AA%A8%EB%8D%98%EC%9E%90%EB%B0%94%EC%9D%B8%EC%95%A1%EC%85%98/Parallel%20Stream.md)
+- [[2023 4월 1주차] / CompletableFuture(비동기)](https://github.com/hjun-park/TIL/blob/main/java/%EB%AA%A8%EB%8D%98%EC%9E%90%EB%B0%94%EC%9D%B8%EC%95%A1%EC%85%98/CompletableFuture.md)
+- [[2023 4월 1주차] / Default Method(디폴트 메서드)](https://github.com/hjun-park/TIL/blob/main/java/%EB%AA%A8%EB%8D%98%EC%9E%90%EB%B0%94%EC%9D%B8%EC%95%A1%EC%85%98/Default%20Method.md)
+
+
+### JSP
+- [[2023 4월 1주차] / JSP 문답](https://github.com/hjun-park/TIL/blob/main/jsp/JSP%20%EB%AC%B8%EB%8B%B5.md)
+- [[2023 4월 1주차] / Servlet(서블릿)](https://github.com/hjun-park/TIL/blob/main/jsp/Servlet.md)
 
 
 ### Git
