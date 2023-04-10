@@ -1,4 +1,4 @@
-> 출처 : [모던 자바 인 액션](http://www.yes24.com/Product/Goods/77125987)
+> ### 출처 : [모던 자바 인 액션](http://www.yes24.com/Product/Goods/77125987)
 
 # Parallel Stream(병렬 스트림)
 
