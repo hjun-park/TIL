@@ -1,0 +1,53 @@
+# 모던 자바 인 액션 문답 (chatGPT)
+
+## 1. 스프링 WebFlux에서의 map, flatMap과 Steram에서의 map, flatMap은 어떤 차이가 있을까 ? 
+Spring WebFlux에서의 map, flatMap과 Java Stream에서의 map, flatMap은 기본적인 사용 방법과 동작은 비슷하지만, Reactive Programming과 Reactive Streams 개념을 기반으로 하고 있어서 몇 가지 차이가 있습니다.
+
+1. 비동기 방식
+   - Spring WebFlux에서의 map, flatMap은 비동기 방식으로 처리되기 때문에, 데이터가 처리될 때까지 블로킹하지 않고 다른 작업을 수행할 수 있습니다. Java Stream의 map, flatMap은 동기 방식으로 처리되므로 처리 결과가 반환될 때까지 기다려야 합니다.
+
+2. Reactive Streams 지원
+   - Spring WebFlux의 map, flatMap은 Reactive Streams의 Publisher 인터페이스를 구현하는 Mono와 Flux와 함께 사용됩니다. 이를 통해 백프레셔(Backpressure)와 같은 Reactive Streams의 기능을 활용하여 안정적인 비동기 데이터 처리를 구현할 수 있습니다. Java Stream의 map, flatMap은 이러한 Reactive Streams 지원을 제공하지 않습니다.
+
+3. 함수형 프로그래밍 지원
+   - Java Stream의 map, flatMap은 함수형 프로그래밍 개념을 적극적으로 활용하고 있습니다. Spring WebFlux의 map, flatMap도 비슷한 개념을 활용하지만, Reactive Streams의 기능과 결합하여 보다 효과적인 비동기 프로그래밍을 구현할 수 있습니다.
+
+4. 결과 반환 타입
+   - Spring WebFlux의 map, flatMap은 Mono와 Flux와 함께 사용되며, 결과적으로 Mono 또는 Flux를 반환합니다. Java Stream의 map, flatMap은 Stream을 반환합니다. 따라서 Spring WebFlux에서는 Mono 또는 Flux와 함께 연결된 다양한 연산을 수행할 수 있습니다.
+
+### 1-1. Reactive Streams 이란 ?
+Reactive Streams는 비동기적이고 이벤트 기반의 스트림 처리를 위한 API 스펙입니다. 이 스펙은 Java 9에서 표준화되었으며, Java, Kotlin, Scala 등의 다양한 언어와 라이브러리에서 사용될 수 있습니다.
+
+Reactive Streams는 Publisher, Subscriber, Subscription, Processor 네 가지 인터페이스로 구성됩니다. 이 인터페이스들은 스트림 처리에서 발생할 수 있는 문제를 해결하기 위해 백프레셔(Backpressure)라는 기능을 제공합니다. 백프레셔는 데이터 생산자와 소비자 간의 속도 차이를 조절하여 시스템의 안정성을 유지하는 역할을 합니다.
+
+Reactive Streams는 이러한 인터페이스를 통해 다양한 비동기 데이터 처리 시나리오를 처리할 수 있습니다. 이를 통해 스트림 처리에서 발생할 수 있는 다양한 문제를 해결하고, 효율적이고 안정적인 비동기 프로그래밍을 가능하게 합니다.
+
+Spring WebFlux는 Reactive Streams 구현체 중 하나인 Project Reactor를 사용하며, 이를 통해 Reactive Streams의 기능을 활용하여 안정적이고 효과적인 비동기 웹 애플리케이션을 구현할 수 있습니다.
+
+<br />
+
+### 1-2. `Spring WebFlux의 map, flatMap도 비슷한 개념을 활용하지만, Reactive Streams의 기능과 결합하여 보다 효과적인 비동기 프로그래밍을 구현할 수 있습니다.` 이 부분 예시를 들어줘
+예를 들어, Spring WebFlux를 사용하여 HTTP 요청에 대한 응답을 처리하는 경우를 생각해보겠습니다. 이때 Mono나 Flux를 사용하여 비동기적으로 데이터를 처리할 수 있습니다.
+
+예를 들어, 다음과 같은 코드를 작성할 수 있습니다.
+```java
+public class rxJava {
+	public static void main(String[] args) {
+		Mono<User> userMono = userRepository.findById(userId);
+
+		Mono<String> usernameMono = userMono.map(user -> user.getUsername());
+
+		Mono<String> messageMono = usernameMono.flatMap(username -> {
+			return Mono.just("Hello " + username);
+		});
+	}
+}
+```
+
+위의 코드에서 userRepository.findById(userId)는 Mono<User>를 반환합니다. 이 Mono 객체에서 User 객체를 추출한 후, User 객체의 username을 추출하기 위해 map 연산자를 사용합니다. 이를 통해 Mono<String> 객체인 usernameMono를 만들 수 있습니다.
+
+그 다음, usernameMono를 flatMap 연산자를 사용하여 다른 Mono<String> 객체 messageMono를 만듭니다. 이 Mono 객체는 usernameMono에서 추출한 username을 사용하여 메시지를 생성합니다.
+
+이렇게 Reactive Streams의 map, flatMap 연산자와 함께 Mono나 Flux를 사용하면, 비동기적으로 데이터를 처리하면서도 스트림 처리에서 발생할 수 있는 다양한 문제를 해결할 수 있습니다. 또한, Reactive Streams의 백프레셔 기능을 활용하여 데이터 생산과 소비의 속도 차이를 조절하면서 시스템의 안정성을 유지할 수 있습니다.
+
+
