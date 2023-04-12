@@ -1,3 +1,5 @@
+> ### 출처 : [[10분 테코톡] 🐶 코기의 Servlet vs Spring](https://www.youtube.com/watch?v=calGCwG_B4Y)
+
 # Servlet
 
 ## 1. 서블릿이란?
